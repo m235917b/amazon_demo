@@ -2,6 +2,8 @@ package com.example.amazon_demo.entities;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "orderposition")
 public class OrderPosition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
