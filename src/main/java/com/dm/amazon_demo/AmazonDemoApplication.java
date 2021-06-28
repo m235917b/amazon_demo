@@ -1,4 +1,4 @@
-package com.example.amazon_demo;
+package com.dm.amazon_demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

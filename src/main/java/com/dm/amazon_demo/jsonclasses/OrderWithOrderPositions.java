@@ -1,10 +1,11 @@
-package com.example.amazon_demo.jsonclasses;
+package com.dm.amazon_demo.jsonclasses;
 
-import com.example.amazon_demo.entities.Order;
-import com.example.amazon_demo.entities.OrderPosition;
+import com.dm.amazon_demo.entities.Order;
+import com.dm.amazon_demo.entities.OrderPosition;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class OrderWithOrderPositions {
     private Order order;
 

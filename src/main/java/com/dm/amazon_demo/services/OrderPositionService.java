@@ -1,8 +1,8 @@
-package com.example.amazon_demo.services;
+package com.dm.amazon_demo.services;
 
-import com.example.amazon_demo.entities.Order;
-import com.example.amazon_demo.entities.OrderPosition;
-import com.example.amazon_demo.repositories.OrderPositionRepository;
+import com.dm.amazon_demo.entities.Order;
+import com.dm.amazon_demo.entities.OrderPosition;
+import com.dm.amazon_demo.repositories.OrderPositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@SuppressWarnings("unused")
 public class OrderPositionService {
     @Autowired
     private OrderPositionRepository orderPositionRepository;

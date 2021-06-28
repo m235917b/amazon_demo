@@ -1,10 +1,11 @@
-package com.example.amazon_demo.entities;
+package com.dm.amazon_demo.entities;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "`order`")
+@SuppressWarnings("unused")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
