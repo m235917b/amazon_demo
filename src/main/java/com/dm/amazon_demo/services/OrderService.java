@@ -33,10 +33,13 @@ public class OrderService {
     @Transactional
     public List<OrderWithOrderPositions> findByCustomer(String name) {
         return getOrdersWithPositions(
-                orderRepository.findByCustomer(
-                        customerService.getCustomerByName(name).orElseThrow(
-                                () -> new ResponseStatusException(
-                                        HttpStatus.NOT_FOUND, "No customer with this name found!"))));
+                orderRepository
+                        .findAll()
+                        .stream()
+                        .filter(o -> o.getCustomer()
+                                .getName()
+                                .equals(name))
+                        .toList());
     }
 
     @Transactional

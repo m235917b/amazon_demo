@@ -27,9 +27,10 @@ public class CustomerService {
 
     @Transactional
     public Optional<Customer> getCustomerByName(String name) {
-        final Customer customer = new Customer();
-        customer.setName(name);
-
-        return customerRepository.findOne(Example.of(customer, ExampleMatcher.matchingAll().withIgnorePaths("id")));
+        return customerRepository
+                .findOne(Example
+                        .of(new Customer(name), ExampleMatcher
+                                .matchingAll()
+                                .withIgnorePaths("id")));
     }
 }
