@@ -17,9 +17,6 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    private OrderService orderService;
-
     @Transactional
     public List<Customer> getCustomers() {
         return customerRepository.findAll();

@@ -32,14 +32,7 @@ public class OrderService {
 
     @Transactional
     public List<OrderWithOrderPositions> findByCustomer(String name) {
-        return getOrdersWithPositions(
-                orderRepository
-                        .findAll()
-                        .stream()
-                        .filter(o -> o.getCustomer()
-                                .getName()
-                                .equals(name))
-                        .toList());
+        return getOrdersWithPositions(orderRepository.findByCustomerName(name));
     }
 
     @Transactional
