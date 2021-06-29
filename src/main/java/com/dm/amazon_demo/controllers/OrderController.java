@@ -18,7 +18,13 @@ public class OrderController {
 
     @GetMapping(value = "/order")
     @Transactional
-    public List<OrderWithOrderPositions> getOrders(@RequestHeader("name") String name) {
+    public List<OrderWithOrderPositions> getOrder(@RequestHeader("name") String name) {
         return orderService.findByCustomer(name);
+    }
+
+    @GetMapping(value = "/orders")
+    @Transactional
+    public List<OrderWithOrderPositions> getOrders() {
+        return orderService.getOrders();
     }
 }

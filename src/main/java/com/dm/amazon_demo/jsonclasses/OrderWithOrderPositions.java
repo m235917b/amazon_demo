@@ -11,6 +11,11 @@ public class OrderWithOrderPositions {
 
     private List<OrderPosition> orderPositions;
 
+    public OrderWithOrderPositions(Order order, List<OrderPosition> orderPositions) {
+        this.order = order;
+        this.orderPositions = orderPositions;
+    }
+
     public OrderWithOrderPositions() {
 
     }
