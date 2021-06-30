@@ -2,6 +2,7 @@ package com.dm.amazon_demo.controllers;
 
 import com.dm.amazon_demo.entities.Order;
 import com.dm.amazon_demo.jsonclasses.OrderPositionWithIds;
+import com.dm.amazon_demo.jsonclasses.OrderWithIds;
 import com.dm.amazon_demo.jsonclasses.OrderWithOrderPositions;
 import com.dm.amazon_demo.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class OrderController {
     }
 
     @PostMapping(value = "/add")
-    public int addOrder(@RequestBody Order order) {
-        return orderService.addOrder(order);
+    public int addOrder(@RequestBody OrderWithIds orderWithIds) {
+        return orderService.addOrder(orderWithIds);
     }
 
     @PostMapping(value = "/position")

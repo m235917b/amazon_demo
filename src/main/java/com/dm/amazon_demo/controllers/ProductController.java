@@ -1,6 +1,5 @@
 package com.dm.amazon_demo.controllers;
 
-import com.dm.amazon_demo.entities.Customer;
 import com.dm.amazon_demo.entities.Product;
 import com.dm.amazon_demo.repositories.ProductRepository;
 import com.dm.amazon_demo.services.ProductService;

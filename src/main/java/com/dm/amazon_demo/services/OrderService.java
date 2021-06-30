@@ -2,6 +2,7 @@ package com.dm.amazon_demo.services;
 
 import com.dm.amazon_demo.entities.OrderPosition;
 import com.dm.amazon_demo.jsonclasses.OrderPositionWithIds;
+import com.dm.amazon_demo.jsonclasses.OrderWithIds;
 import com.dm.amazon_demo.jsonclasses.OrderWithOrderPositions;
 import com.dm.amazon_demo.entities.Order;
 import com.dm.amazon_demo.repositories.OrderRepository;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +59,14 @@ public class OrderService {
     }
 
     @Transactional
-    public int addOrder(Order order) {
+    public int addOrder(OrderWithIds orderWithIds) {
+        final Order order = new Order();
+
+        order.setId(orderWithIds.getId());
+        order.setOrderDate(LocalDateTime.parse(orderWithIds.getOrderDate()));
+        order.setCustomer(customerService.findById(orderWithIds.getCustomer()));
+        order.setOrderPositions(new ArrayList<>());
+
         return orderRepository.save(order).getId();
     }
 

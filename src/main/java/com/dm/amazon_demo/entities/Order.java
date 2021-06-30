@@ -2,6 +2,7 @@ package com.dm.amazon_demo.entities;
 
 import com.dm.amazon_demo.services.CustomerService;
 import com.dm.amazon_demo.services.OrderService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Order extends ReflectionMapper {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    @JsonIgnoreProperties("order")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderPosition> orderPositions;
 
