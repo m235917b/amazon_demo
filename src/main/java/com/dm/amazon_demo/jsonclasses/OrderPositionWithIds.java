@@ -7,7 +7,7 @@ public class OrderPositionWithIds {
 
     private int quantity;
 
-    private int buyingprice;
+    private int buyingPrice;
 
     private int order;
 
@@ -29,12 +29,12 @@ public class OrderPositionWithIds {
         this.quantity = quantity;
     }
 
-    public int getBuyingprice() {
-        return buyingprice;
+    public int getBuyingPrice() {
+        return buyingPrice;
     }
 
-    public void setBuyingprice(int buyingprice) {
-        this.buyingprice = buyingprice;
+    public void setBuyingPrice(int buyingPrice) {
+        this.buyingPrice = buyingPrice;
     }
 
     public int getOrder() {

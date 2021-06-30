@@ -67,17 +67,12 @@ public class OrderService {
         order.setCustomer(customerService.findById(orderWithIds.getCustomer()));
         order.setOrderPositions(new ArrayList<>());
 
-        return orderRepository.save(order).getId();
+        return orderRepository.saveAndFlush(order).getId();
     }
 
     @Transactional
-    public void put(Order order) {
-        orderRepository.save(order);
-    }
-
-    @Transactional
-    public void savePosition(OrderPosition orderPosition) {
-        orderPositionService.save(orderPosition);
+    public int savePosition(OrderPosition orderPosition) {
+        return orderPositionService.save(orderPosition);
     }
 
     @Transactional
@@ -107,7 +102,7 @@ public class OrderService {
 
         orderPosition.setId(orderPositionWithIds.getId());
         orderPosition.setQuantity(orderPositionWithIds.getQuantity());
-        orderPosition.setBuyingprice(orderPositionWithIds.getBuyingprice());
+        orderPosition.setBuyingprice(orderPositionWithIds.getBuyingPrice());
         orderPosition.setOrder(findById(orderPositionWithIds.getOrder()));
         orderPosition.setProduct(productService
                 .get(orderPositionWithIds.getProduct())

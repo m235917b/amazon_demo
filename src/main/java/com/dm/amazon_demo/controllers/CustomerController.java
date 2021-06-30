@@ -29,8 +29,8 @@ public class CustomerController {
     }
 
     @PutMapping(value = "")
-    public void put(@RequestBody Customer customer) {
-        customerService.put(customer);
+    public int put(@RequestBody Customer customer) {
+        return customerService.put(customer);
     }
 
     @PatchMapping(value = "/{id}")

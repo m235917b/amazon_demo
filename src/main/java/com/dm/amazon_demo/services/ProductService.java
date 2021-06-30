@@ -41,18 +41,12 @@ public class ProductService {
 
     @Transactional
     public int registerNewProduct(Product product) {
-        if (productRepository.exists(Example.of(product,
-                ExampleMatcher.matchingAll().withIgnorePaths("id")))) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Benutzer mit diesem Namen existiert bereits!");
-        }
-
         return productRepository.save(product).getId();
     }
 
     @Transactional
-    public void put(Product product) {
-        productRepository.save(product);
+    public int put(Product product) {
+        return productRepository.saveAndFlush(product).getId();
     }
 
     @Transactional

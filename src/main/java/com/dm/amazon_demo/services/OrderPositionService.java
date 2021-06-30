@@ -22,8 +22,8 @@ public class OrderPositionService {
     }
 
     @Transactional
-    public void save(OrderPosition orderPosition) {
-        orderPositionRepository.save(orderPosition);
+    public int save(OrderPosition orderPosition) {
+        return orderPositionRepository.saveAndFlush(orderPosition).getId();
     }
 
     @Transactional

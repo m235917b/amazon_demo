@@ -37,13 +37,13 @@ public class OrderController {
     }
 
     @PostMapping(value = "/position")
-    public void addOrderPosition(@RequestBody OrderPositionWithIds orderPositionWithIds) {
-        orderService.savePosition(orderService.fromOrderPositionWithIds(orderPositionWithIds));
+    public int addOrderPosition(@RequestBody OrderPositionWithIds orderPositionWithIds) {
+        return orderService.savePosition(orderService.fromOrderPositionWithIds(orderPositionWithIds));
     }
 
     @PutMapping(value = "")
-    public void put(@RequestBody Order order) {
-        orderService.put(order);
+    public int put(@RequestBody OrderWithIds orderWithIds) {
+        return orderService.addOrder(orderWithIds);
     }
 
     @PatchMapping(value = "/{id}")

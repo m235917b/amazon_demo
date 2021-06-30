@@ -1,0 +1,1512 @@
+{
+	"info": {
+		"_postman_id": "5e19d251-f825-43da-b4fd-c64429e2b4d5",
+		"name": "amazon_demo-customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register arne",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Arne Admin\", \"id\":\"0\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/customer/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register baum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id2\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Benjamin Baum\",\r\n    \"id\": \"0\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/customer/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Arne and Baum added\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var arne;\r",
+							"    var baum;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id\")) {\r",
+							"            arne = jsonData[i];\r",
+							"        }\r",
+							"\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            baum = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(arne.name).to.eql(\"Arne Admin\");\r",
+							"    pm.expect(baum.name).to.eql(\"Benjamin Baum\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add via put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id4\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Hans Hugo\",\r\n    \"id\":\"0\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update via put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Arno Admin\",\r\n    \"id\":{{id}}\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Arne changed to Arno\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var arne;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id\")) {\r",
+							"            arne = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(arne.name).to.eql(\"Arno Admin\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"added hans\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var hans;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id4\")) {\r",
+							"            hans = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(hans.name).to.eql(\"Hans Hugo\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete arno",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/customer/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Arno should be deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var arno;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id\")) {\r",
+							"            arno = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(arno).to.eql(undefined);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Baum changed to Baumo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Benjamin Baumo\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/customer/{{id2}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"{{id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Baum should now be Baumo\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var baum;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            baum = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(baum.name).to.eql(\"Benjamin Baumo\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Staubsauger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"0\",\r\n    \"title\":\"Staubsauger 3000\",\r\n    \"price\":\"120\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/product/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Klappstuhl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"product_id\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Klappstuhl\",\r\n    \"price\": \"10\",\r\n    \"id\": \"0\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/product/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Hantelbank",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id2\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Hantelbank\",\r\n    \"price\": \"199\",\r\n    \"id\": \"0\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/product/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"new products should now exist\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var staubsauger;\r",
+							"    var klappstuhl;\r",
+							"    var hantelbank;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id\")) {\r",
+							"            staubsauger = jsonData[i];\r",
+							"        }\r",
+							"\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"product_id\")) {\r",
+							"            klappstuhl = jsonData[i];\r",
+							"        }\r",
+							"\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            hantelbank = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(staubsauger.title).to.eql(\"Staubsauger 3000\");\r",
+							"    pm.expect(klappstuhl.title).to.eql(\"Klappstuhl\");\r",
+							"    pm.expect(hantelbank.title).to.eql(\"Hantelbank\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/product/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add product via put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id2\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Klappstuhl 2.0\",\r\n    \"price\": \"15\",\r\n    \"id\": \"0\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update product via put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Staubsauger 5000\",\r\n    \"price\": \"155\",\r\n    \"id\": {{id}}\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"new product should now exist and staubsauger updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var staubsauger;\r",
+							"    var klappstuhl2;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id\")) {\r",
+							"            staubsauger = jsonData[i];\r",
+							"        }\r",
+							"\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            klappstuhl2 = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(staubsauger.title).to.eql(\"Staubsauger 5000\");\r",
+							"    pm.expect(klappstuhl2.title).to.eql(\"Klappstuhl 2.0\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/product/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch klappstuhl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"price\":\"99\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/product/{{id2}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"{{id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Staubsauger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : \"7\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/product/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"klappstuhl updated and staubsauger deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var staubsauger;\r",
+							"    var klappstuhl;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id\")) {\r",
+							"            staubsauger = jsonData[i];\r",
+							"        }\r",
+							"\r",
+							"        if (jsonData[i].id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            klappstuhl = jsonData[i];\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(staubsauger).to.eql(undefined);\r",
+							"    pm.expect(klappstuhl.price).to.eql(99);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/product/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register mustermann",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Max Mustermann\",\r\n    \"id\": \"0\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/customer/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id2\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"0\",\r\n    \"orderDate\": \"2021-04-04T06:43\",\r\n    \"customer\": {{id}}\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/order/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add order position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id3\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"0\",\r\n    \"quantity\": \"5\",\r\n    \"buyingPrice\":\"50\",\r\n    \"order\":{{id2}},\r\n    \"product\":{{product_id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order/position",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"position"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add via put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id4\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"0\",\r\n    \"orderDate\": \"2021-06-28T07:05\",\r\n    \"customer\": {{id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"orders with position should exist\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var order;\r",
+							"    var order2;\r",
+							"    var position;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].order.id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            order = jsonData[i].order;\r",
+							"        }\r",
+							"\r",
+							"        if (jsonData[i].order.id == postman.getEnvironmentVariable(\"id4\")) {\r",
+							"            order2 = jsonData[i].order;\r",
+							"        }\r",
+							"\r",
+							"        for (var x = 0; x < jsonData[i].order.orderPositions.length; ++x) {\r",
+							"            if (jsonData[i].order.orderPositions[x].id == postman.getEnvironmentVariable(\"id3\")) {\r",
+							"                position = jsonData[i].order.orderPositions[x];\r",
+							"            }\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(order.orderDate).to.eql(\"2021-04-04T06:43:00\");\r",
+							"    pm.expect(order2.orderDate).to.eql(\"2021-06-28T07:05:00\");\r",
+							"    pm.expect(position.quantity).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/order/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update via put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": {{id2}},\r\n    \"orderDate\": \"2021-06-26T10:05\",\r\n    \"customer\": {{id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"order should now be updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var order;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].order.id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            order = jsonData[i].order;\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(order.orderDate).to.eql(\"2021-06-26T10:05:00\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/order/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update via patch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderDate\": \"2021-06-28T07:25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order/{{id2}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"{{id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete order position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/order/{{id2}}/position/{{id3}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"{{id2}}",
+						"position",
+						"{{id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add order position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id\", jsonData);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"0\",\r\n    \"quantity\": \"15\",\r\n    \"buyingPrice\":\"150\",\r\n    \"order\":{{id2}},\r\n    \"product\":{{product_id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order/position",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"position"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"order should now be updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var order;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].order.id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            order = jsonData[i].order;\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(order.orderDate).to.eql(\"2021-06-28T07:25:00\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"first position should be deleted, second created\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var position1;\r",
+							"    var position2;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        for (var x = 0; x < jsonData[i].order.orderPositions.length; ++x) {\r",
+							"            if (jsonData[i].order.orderPositions[x].id == postman.getEnvironmentVariable(\"id3\")) {\r",
+							"                position1 = jsonData[i].order.orderPositions[x];\r",
+							"            }\r",
+							"\r",
+							"            if (jsonData[i].order.orderPositions[x].id == postman.getEnvironmentVariable(\"id\")) {\r",
+							"                position2 = jsonData[i].order.orderPositions[x];\r",
+							"            }\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(position1).to.eql(undefined);\r",
+							"    pm.expect(position2.quantity).to.eql(15);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/order/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/order/{{id2}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"{{id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"order should now be deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var order;\r",
+							"\r",
+							"    for(var i = 0; i < jsonData.length; ++i) {\r",
+							"        if (jsonData[i].order.id == postman.getEnvironmentVariable(\"id2\")) {\r",
+							"            order = jsonData[i].order;\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.expect(order).to.eql(undefined);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/order/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

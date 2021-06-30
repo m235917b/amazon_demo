@@ -44,18 +44,12 @@ public class CustomerService {
 
     @Transactional
     public int registerNewCustomer(Customer customer) {
-        if (customerRepository.exists(Example.of(customer,
-                ExampleMatcher.matchingAll().withIgnorePaths("id")))) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Benutzer mit diesem Namen existiert bereits!");
-        }
-
         return customerRepository.save(customer).getId();
     }
 
     @Transactional
-    public void put(Customer customer) {
-        customerRepository.save(customer);
+    public int put(Customer customer) {
+        return customerRepository.saveAndFlush(customer).getId();
     }
 
     @Transactional

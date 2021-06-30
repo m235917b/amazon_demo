@@ -25,6 +25,7 @@ public class Product extends ReflectionMapper {
     protected void initReflectionMapper() {
         reflectionMap.put("id", i -> setId(Integer.parseInt(i)));
         reflectionMap.put("title", this::setTitle);
+        reflectionMap.put("price", p -> setPrice(Integer.parseInt(p)));
     }
 
     public int getId() {

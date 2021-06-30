@@ -33,8 +33,8 @@ public class ProductController {
     }
 
     @PutMapping(value = "")
-    public void put(@RequestBody Product product) {
-        productService.put(product);
+    public int put(@RequestBody Product product) {
+        return productService.put(product);
     }
 
     @PatchMapping(value = "/{id}")

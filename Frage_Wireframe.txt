@@ -1,0 +1,1 @@
+Bei uns benötigt man 1 Request (/order/fromCustomer), um alle benötigten Informationen darzustellen.
