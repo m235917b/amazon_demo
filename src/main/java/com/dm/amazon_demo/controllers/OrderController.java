@@ -2,6 +2,8 @@ package com.dm.amazon_demo.controllers;
 
 import com.dm.amazon_demo.entities.Customer;
 import com.dm.amazon_demo.entities.Order;
+import com.dm.amazon_demo.entities.OrderPosition;
+import com.dm.amazon_demo.jsonclasses.OrderPositionWithIds;
 import com.dm.amazon_demo.jsonclasses.OrderWithOrderPositions;
 import com.dm.amazon_demo.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,11 @@ public class OrderController {
         return orderService.addOrder(order);
     }
 
+    @PostMapping(value = "/position")
+    public void addOrderPosition(@RequestBody OrderPositionWithIds orderPositionWithIds) {
+        orderService.savePosition(orderService.fromOrderPositionWithIds(orderPositionWithIds));
+    }
+
     @PutMapping(value = "")
     public void put(@RequestBody Order order) {
         orderService.put(order);
@@ -47,5 +54,10 @@ public class OrderController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id) {
         orderService.delete(id);
+    }
+
+    @DeleteMapping(value = "/{id}/position/{posId}")
+    public void delete(@PathVariable int id, @PathVariable int posId) {
+        orderService.deletePosition(id, posId);
     }
 }

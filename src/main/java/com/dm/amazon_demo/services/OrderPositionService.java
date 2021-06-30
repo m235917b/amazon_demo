@@ -19,4 +19,14 @@ public class OrderPositionService {
     public List<OrderPosition> find(Order order) {
         return orderPositionRepository.findByOrder(order);
     }
+
+    @Transactional
+    public void save(OrderPosition orderPosition) {
+        orderPositionRepository.save(orderPosition);
+    }
+
+    @Transactional
+    public void deleteById(int id) {
+        orderPositionRepository.deleteById(id);
+    }
 }

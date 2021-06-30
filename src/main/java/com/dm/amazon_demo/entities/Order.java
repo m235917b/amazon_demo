@@ -2,7 +2,9 @@ package com.dm.amazon_demo.entities;
 
 import com.dm.amazon_demo.services.CustomerService;
 import com.dm.amazon_demo.services.OrderService;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +15,12 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class Order extends ReflectionMapper {
     @Autowired
-    private CustomerService customerService;
+    @Transient
+    private static CustomerService customerService;
+
+    @Autowired
+    @Transient
+    private static OrderService orderService;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +29,11 @@ public class Order extends ReflectionMapper {
     @Column(name = "orderdate")
     private LocalDateTime orderDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderPosition> orderPositions;
 
     public Order() {
