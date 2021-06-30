@@ -16,6 +16,7 @@ import java.util.Map;
 @RequestMapping(value = "/product")
 @Transactional
 public class ProductController {
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -46,4 +47,5 @@ public class ProductController {
     public void delete(@PathVariable int id) {
         productService.delete(id);
     }
+
 }

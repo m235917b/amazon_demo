@@ -1,8 +1,6 @@
 package com.dm.amazon_demo.controllers;
 
-import com.dm.amazon_demo.entities.Customer;
 import com.dm.amazon_demo.entities.Order;
-import com.dm.amazon_demo.entities.OrderPosition;
 import com.dm.amazon_demo.jsonclasses.OrderPositionWithIds;
 import com.dm.amazon_demo.jsonclasses.OrderWithOrderPositions;
 import com.dm.amazon_demo.services.OrderService;
@@ -18,6 +16,7 @@ import java.util.Map;
 @RequestMapping("/order")
 @Transactional
 public class OrderController {
+
     @Autowired
     private OrderService orderService;
 
@@ -60,4 +59,5 @@ public class OrderController {
     public void delete(@PathVariable int id, @PathVariable int posId) {
         orderService.deletePosition(id, posId);
     }
+
 }

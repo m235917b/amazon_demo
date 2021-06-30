@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 @SuppressWarnings("unused")
 public interface OrderRepository extends JpaRepository<Order, Integer> {
+
     List<Order> findByCustomerName(String customerName);
+
 }

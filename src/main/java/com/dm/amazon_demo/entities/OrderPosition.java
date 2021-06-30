@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "orderposition")
 @SuppressWarnings("unused")
 public class OrderPosition {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -72,4 +73,5 @@ public class OrderPosition {
     public void setProduct(Product product) {
         this.product = product;
     }
+
 }

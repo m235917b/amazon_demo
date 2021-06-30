@@ -14,6 +14,7 @@ import java.util.Map;
 @RequestMapping(value = "/customer")
 @Transactional
 public class CustomerController {
+
     @Autowired
     private CustomerService customerService;
 
@@ -41,4 +42,5 @@ public class CustomerController {
     public void delete(@PathVariable int id) {
         customerService.delete(id);
     }
+
 }

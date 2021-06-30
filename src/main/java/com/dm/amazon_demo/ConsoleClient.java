@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 
 public class ConsoleClient {
+
     public static void main(String[] args) throws IOException {
         final Socket socket = new Socket("localhost", 8080);
 
@@ -32,7 +33,7 @@ public class ConsoleClient {
         //printStream.println("PUT /customer HTTP/1.0\r\ncontent-length: " + body.length() + "\r\ncontent-type: application/json\r\n\r\n" + body);
         //printStream.println("PATCH /customer/4 HTTP/1.0\r\ncontent-length: " + body.length() + "\r\ncontent-type: application/json\r\n\r\n" + body);
         //printStream.println("POST /order/position HTTP/1.0\r\ncontent-length: " + body.length() + "\r\ncontent-type: application/json\r\n\r\n" + body);
-        printStream.println("DELETE /order/5/position/8 HTTP/1.0\r\n\r\n");
+        printStream.println("DELETE /order/5/position/13 HTTP/1.0\r\n\r\n");
         //printStream.println("DELETE /order/4 HTTP/1.0\r\n\r\n");
 
         while ((c = iss.read()) != -1) {
@@ -41,4 +42,5 @@ public class ConsoleClient {
 
         System.out.println(message);
     }
+
 }

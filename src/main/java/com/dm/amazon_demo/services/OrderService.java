@@ -17,6 +17,7 @@ import java.util.Map;
 @Service
 @SuppressWarnings("unused")
 public class OrderService {
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -67,7 +68,6 @@ public class OrderService {
     @Transactional
     public void savePosition(OrderPosition orderPosition) {
         orderPositionService.save(orderPosition);
-        System.out.println(orderPosition.getOrder().getOrderPositions());
     }
 
     @Transactional
@@ -78,6 +78,7 @@ public class OrderService {
                         "Order doesn't exist!"));
 
         values.forEach(order::setByName);
+
         orderRepository.save(order);
     }
 
@@ -105,4 +106,5 @@ public class OrderService {
 
         return orderPosition;
     }
+
 }

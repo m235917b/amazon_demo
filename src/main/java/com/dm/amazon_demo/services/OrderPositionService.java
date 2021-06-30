@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 @SuppressWarnings("unused")
 public class OrderPositionService {
+
     @Autowired
     private OrderPositionRepository orderPositionRepository;
 
@@ -29,4 +30,5 @@ public class OrderPositionService {
     public void deleteById(int id) {
         orderPositionRepository.deleteById(id);
     }
+
 }

@@ -2,9 +2,7 @@ package com.dm.amazon_demo.entities;
 
 import com.dm.amazon_demo.services.CustomerService;
 import com.dm.amazon_demo.services.OrderService;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +12,7 @@ import java.util.List;
 @Table(name = "`order`")
 @SuppressWarnings("unused")
 public class Order extends ReflectionMapper {
+
     @Autowired
     @Transient
     private static CustomerService customerService;
@@ -78,4 +77,5 @@ public class Order extends ReflectionMapper {
     public void setOrderPositions(List<OrderPosition> orderPositions) {
         this.orderPositions = orderPositions;
     }
+
 }

@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 @SuppressWarnings("unused")
 public class CustomerService {
+
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -63,7 +64,9 @@ public class CustomerService {
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Customer doesn't exist!"));
+
         values.forEach(customer::setByName);
+
         customerRepository.save(customer);
     }
 
@@ -71,4 +74,5 @@ public class CustomerService {
     public void delete(int id) {
         customerRepository.deleteById(id);
     }
+
 }

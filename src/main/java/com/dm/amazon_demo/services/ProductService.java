@@ -1,6 +1,5 @@
 package com.dm.amazon_demo.services;
 
-import com.dm.amazon_demo.entities.Customer;
 import com.dm.amazon_demo.entities.Product;
 import com.dm.amazon_demo.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import java.util.Optional;
 @Service
 @SuppressWarnings("unused")
 public class ProductService {
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -25,6 +25,7 @@ public class ProductService {
     public List<Product> get() {
         return productRepository.findAll();
     }
+
     @Transactional
     public Product findById(int id) {
         return productRepository
@@ -68,4 +69,5 @@ public class ProductService {
     public void delete(int id) {
         productRepository.deleteById(id);
     }
+
 }

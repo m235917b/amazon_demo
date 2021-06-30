@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public abstract class ReflectionMapper {
+
     protected final Map<String, Consumer<String>> reflectionMap;
 
     protected ReflectionMapper() {
@@ -17,4 +18,5 @@ public abstract class ReflectionMapper {
     public void setByName(String field, String value) {
         reflectionMap.get(field).accept(value);
     }
+
 }

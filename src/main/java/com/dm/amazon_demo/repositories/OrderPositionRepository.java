@@ -10,5 +10,7 @@ import java.util.List;
 @Repository
 @SuppressWarnings("unused")
 public interface OrderPositionRepository extends JpaRepository<OrderPosition, Integer> {
+
     List<OrderPosition> findByOrder(Order order);
+
 }

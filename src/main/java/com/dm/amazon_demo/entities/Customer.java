@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "customer")
 @SuppressWarnings("unused")
 public class Customer extends ReflectionMapper {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -42,4 +43,5 @@ public class Customer extends ReflectionMapper {
     public void setName(String name) {
         this.name = name;
     }
+
 }

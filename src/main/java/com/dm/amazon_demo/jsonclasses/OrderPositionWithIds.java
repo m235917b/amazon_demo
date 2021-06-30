@@ -2,6 +2,7 @@ package com.dm.amazon_demo.jsonclasses;
 
 @SuppressWarnings("unused")
 public class OrderPositionWithIds {
+
     private int id;
 
     private int quantity;
@@ -51,4 +52,5 @@ public class OrderPositionWithIds {
     public void setProduct(int product) {
         this.product = product;
     }
+
 }

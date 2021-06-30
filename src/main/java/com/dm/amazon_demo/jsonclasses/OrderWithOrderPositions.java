@@ -7,6 +7,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class OrderWithOrderPositions {
+
     private Order order;
 
     private List<OrderPosition> orderPositions;
@@ -35,4 +36,5 @@ public class OrderWithOrderPositions {
     public void setOrderPositions(List<OrderPosition> orderPositions) {
         this.orderPositions = orderPositions;
     }
+
 }
