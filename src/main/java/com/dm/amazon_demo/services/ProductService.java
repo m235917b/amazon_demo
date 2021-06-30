@@ -16,12 +16,17 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional
-    public List<Product> getProducts() {
+    public List<Product> get() {
         return productRepository.findAll();
     }
 
     @Transactional
-    public Optional<Product> getProductById(int id) {
+    public Optional<Product> get(int id) {
         return productRepository.findById(id);
+    }
+
+    @Transactional
+    public void delete(int id) {
+        productRepository.deleteById(id);
     }
 }

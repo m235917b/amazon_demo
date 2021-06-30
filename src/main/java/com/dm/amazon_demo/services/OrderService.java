@@ -4,12 +4,11 @@ import com.dm.amazon_demo.jsonclasses.OrderWithOrderPositions;
 import com.dm.amazon_demo.entities.Order;
 import com.dm.amazon_demo.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @SuppressWarnings("unused")
@@ -26,7 +25,7 @@ public class OrderService {
     private List<OrderWithOrderPositions> getOrdersWithPositions(List<Order> orders) {
         return orders
                 .stream()
-                .map(o -> new OrderWithOrderPositions(o, orderPositionService.findByOrder(o)))
+                .map(o -> new OrderWithOrderPositions(o, orderPositionService.find(o)))
                 .toList();
     }
 
@@ -36,7 +35,23 @@ public class OrderService {
     }
 
     @Transactional
-    public List<OrderWithOrderPositions> getOrders() {
+    public List<OrderWithOrderPositions> get() {
         return getOrdersWithPositions(orderRepository.findAll());
+    }
+
+    public int addOrder(Order order) {
+        return orderRepository.save(order).getId();
+    }
+
+    public void put(Order order) {
+        orderRepository.save(order);
+    }
+
+    public void patch(int id, Map<String, String> values) {
+    }
+
+    @Transactional
+    public void delete(int id) {
+        orderRepository.deleteById(id);
     }
 }

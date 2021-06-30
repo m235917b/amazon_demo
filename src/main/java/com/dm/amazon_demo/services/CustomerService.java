@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -20,8 +21,15 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Transactional
-    public List<Customer> getCustomers() {
+    public List<Customer> get() {
         return customerRepository.findAll();
+    }
+
+    public Customer findById(int id) {
+        return customerRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Customer doesn't exist!"));
     }
 
     @Transactional
@@ -32,25 +40,35 @@ public class CustomerService {
                                 .matchingAll()
                                 .withIgnorePaths("id")));
     }
-    @Transactional
-    public void registerNewCustomer(Customer customer) {
 
-        if (customerRepository.findByName(customer.getName()) != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Benutzer mit diesem Namen existiert bereits!");
+    @Transactional
+    public int registerNewCustomer(Customer customer) {
+        if (customerRepository.exists(Example.of(customer,
+                ExampleMatcher.matchingAll().withIgnorePaths("id")))) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Benutzer mit diesem Namen existiert bereits!");
         }
 
-        customerRepository.save(customer);
-
+        return customerRepository.save(customer).getId();
     }
 
     @Transactional
-    public void deleteCustomer(String name) {
-
-       customerRepository.delete(getCustomerByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Benutzer mit diesem Namen konnte nicht gefunden werden!")));
-
-
-
+    public void put(Customer customer) {
+        customerRepository.save(customer);
     }
 
+    @Transactional
+    public void patch(int id, Map<String, String> values) {
+        final Customer customer = customerRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Customer doesn't exist!"));
+        values.forEach(customer::setByName);
+        customerRepository.save(customer);
+    }
 
+    @Transactional
+    public void delete(int id) {
+        customerRepository.deleteById(id);
+    }
 }

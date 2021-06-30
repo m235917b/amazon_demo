@@ -1,25 +1,43 @@
 package com.dm.amazon_demo.entities;
 
+import com.dm.amazon_demo.services.CustomerService;
+import com.dm.amazon_demo.services.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "`order`")
 @SuppressWarnings("unused")
-public class Order {
+public class Order extends ReflectionMapper {
+    @Autowired
+    private CustomerService customerService;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "orderdate")
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private List<OrderPosition> orderPositions;
+
     public Order() {
 
+    }
+
+    @Override
+    protected void initReflectionMapper() {
+        reflectionMap.put("id", i -> setId(Integer.parseInt(i)));
+        reflectionMap.put("orderDate", d -> setOrderDate(LocalDateTime.parse(d)));
+        reflectionMap.put("customer", c -> setCustomer(customerService.findById(Integer.parseInt(c))));
     }
 
     public int getId() {
@@ -30,11 +48,11 @@ public class Order {
         this.id = id;
     }
 
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -44,5 +62,13 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public List<OrderPosition> getOrderPositions() {
+        return orderPositions;
+    }
+
+    public void setOrderPositions(List<OrderPosition> orderPositions) {
+        this.orderPositions = orderPositions;
     }
 }
