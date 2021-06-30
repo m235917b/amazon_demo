@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product")
 @SuppressWarnings("unused")
-public class Product {
+public class Product extends ReflectionMapper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,6 +18,12 @@ public class Product {
 
     public Product() {
 
+    }
+
+    @Override
+    protected void initReflectionMapper() {
+        reflectionMap.put("id", i -> setId(Integer.parseInt(i)));
+        reflectionMap.put("title", this::setTitle);
     }
 
     public int getId() {
