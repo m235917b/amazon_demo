@@ -1,6 +1,5 @@
 package com.dm.amazon_demo.controllers;
 
-import com.dm.amazon_demo.entities.Order;
 import com.dm.amazon_demo.jsonclasses.OrderPositionWithIds;
 import com.dm.amazon_demo.jsonclasses.OrderWithIds;
 import com.dm.amazon_demo.jsonclasses.OrderWithOrderPositions;
